@@ -1,6 +1,6 @@
-namespace Qel.Ef.Contexts.Bases;
+﻿namespace Qel.Ef.Providers.Common;
 
 public interface IProviderConfigurator
 {
-    
+
 }

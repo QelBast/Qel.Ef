@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Qel.Ef.Providers.Common\Qel.Ef.Providers.Common.csproj" />
+  </ItemGroup>
+
 </Project>
