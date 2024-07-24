@@ -1,0 +1,9 @@
+networks:
+  db_lite_net:
+services:
+  dbLite:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
