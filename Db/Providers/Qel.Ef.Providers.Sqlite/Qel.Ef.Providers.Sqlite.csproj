@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Qel.Ef.Providers.Common\Qel.Ef.Providers.Common.csproj" />
+    <ProjectReference Include="..\Qel.Ef.Providers.Common\Qel.Ef.Providers.Common.csproj" />
   </ItemGroup>
 
 </Project>
