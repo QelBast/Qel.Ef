@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace Qel.Ef.Contexts.Bases;
 
-public class BaseDbContext : DbContext
+public class InMemoryDbContext : DbContext
 {
-    public BaseDbContext(DbContextOptions options) : base(options)
+    public InMemoryDbContext(DbContextOptions options) : base(options)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
-        DbPath = Path.Join(path, "blogging.db");
+        DbPath = Path.Join(path, "eftest.db");
+        TypeName = this.GetType().Name;
     }
 
     /// <summary>
@@ -29,7 +30,8 @@ public class BaseDbContext : DbContext
     /// 
     /// </summary>
     /// <param name="options"></param>
-    protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data source={DbPath}");
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseSqlite($"Data source={DbPath}");
     
     
 }

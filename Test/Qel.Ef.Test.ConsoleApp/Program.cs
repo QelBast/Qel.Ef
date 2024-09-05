@@ -1,15 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Qel.Common.Console.Hosting;
 
-namespace Qel.Ef.Test.Console;
+namespace Qel.Ef.Test.ConsoleApp;
 public class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        IHost host = Host.CreateDefaultBuilder(args)
-                         .ConfigureServices((hostingContext, services) =>
-                         {
-                             //services.Add
-                         })
-                         .Build();
+        HostUtils.RunQueueConsoleApplicationHost(args).Wait();
     }
 }
