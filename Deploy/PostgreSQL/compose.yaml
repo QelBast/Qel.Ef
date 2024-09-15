@@ -1,7 +1,9 @@
+name: myef
 networks:
   db_postgres_net:
 services:
   dbPostgres:
+    image: postgres:alpine3.20
     env_file:
       - .env
     healthcheck:
@@ -10,4 +12,4 @@ services:
       timeout: 30s
       retries: 10
     ports:
-      - 5432:5432
+      - 32942:5432

@@ -1,0 +1,9 @@
+{
+    "ConnectionStrings": {
+        "DbContextTest": "Host:localhost;Port:5432;Username=postgres;Password=postgres;Database=test",
+        "DbContextMain": "Host:localhost;Port:5432;Username=postgres;Password=postgres;Database=main"
+    },
+    "ContextProviders": {
+        "DbContextMain": "Postgres"
+    }
+}

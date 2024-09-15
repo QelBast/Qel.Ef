@@ -1,6 +1,6 @@
 namespace Qel.Api.Transport;
 
-public class BaseMessage<T>
+public class BaseMessage<T>(string? content)
 {
-    public T? Content { get; set; }
+    public string? Content { get; set; } = content;
 }

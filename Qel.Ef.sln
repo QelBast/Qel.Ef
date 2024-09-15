@@ -25,17 +25,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qel.Ef.Test.ConsoleApp", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{FCD5B5C7-207D-46E6-BC38-0B2C824C5FA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Common.Path", "Common\Qel.Common.Path\Qel.Common.Path.csproj", "{5B74739C-1B56-4C65-943F-C79DD95DBE63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qel.Common.Path", "Common\Qel.Common.Path\Qel.Common.Path.csproj", "{5B74739C-1B56-4C65-943F-C79DD95DBE63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{72E5102A-E56B-4066-AD30-D3541F61F40E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Api.Transport.RabbitMq.Client", "Api\Qel.Api.Transport.RabbitMq.Client\Qel.Api.Transport.RabbitMq.Client.csproj", "{678AB69B-3606-4A53-BF5F-9B87F46C5E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qel.Api.Transport.RabbitMq.Client", "Api\Qel.Api.Transport.RabbitMq.Client\Qel.Api.Transport.RabbitMq.Client.csproj", "{678AB69B-3606-4A53-BF5F-9B87F46C5E55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Api.Transport", "Api\Qel.Api.Transport\Qel.Api.Transport.csproj", "{99098D64-9F3F-4434-8545-BFE3E87752D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qel.Api.Transport", "Api\Qel.Api.Transport\Qel.Api.Transport.csproj", "{99098D64-9F3F-4434-8545-BFE3E87752D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Common.Console.Hosting.RabbitMq", "Common\Qel.Common.Console.Hosting.RabbitMq\Qel.Common.Console.Hosting.RabbitMq.csproj", "{4EFC6224-2314-4624-807F-5FEBB501FE58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qel.Common.Console.Hosting.RabbitMq", "Common\Qel.Common.Console.Hosting.RabbitMq\Qel.Common.Console.Hosting.RabbitMq.csproj", "{4EFC6224-2314-4624-807F-5FEBB501FE58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Common.Console.Hosting", "Common\Qel.Common.Console.Hosting\Qel.Common.Console.Hosting.csproj", "{5CFE6A25-55AA-440E-A212-39B52A30E811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qel.Common.Console.Hosting", "Common\Qel.Common.Console.Hosting\Qel.Common.Console.Hosting.csproj", "{5CFE6A25-55AA-440E-A212-39B52A30E811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Ef.DesignTimeUtils", "Db\Qel.Ef.DesignTimeUtils\Qel.Ef.DesignTimeUtils.csproj", "{599CD79B-F7C0-48EA-9DE2-CD19B1495151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{5CFE6A25-55AA-440E-A212-39B52A30E811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CFE6A25-55AA-440E-A212-39B52A30E811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CFE6A25-55AA-440E-A212-39B52A30E811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599CD79B-F7C0-48EA-9DE2-CD19B1495151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599CD79B-F7C0-48EA-9DE2-CD19B1495151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599CD79B-F7C0-48EA-9DE2-CD19B1495151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599CD79B-F7C0-48EA-9DE2-CD19B1495151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{99098D64-9F3F-4434-8545-BFE3E87752D8} = {72E5102A-E56B-4066-AD30-D3541F61F40E}
 		{4EFC6224-2314-4624-807F-5FEBB501FE58} = {FCD5B5C7-207D-46E6-BC38-0B2C824C5FA6}
 		{5CFE6A25-55AA-440E-A212-39B52A30E811} = {FCD5B5C7-207D-46E6-BC38-0B2C824C5FA6}
+		{599CD79B-F7C0-48EA-9DE2-CD19B1495151} = {C1CD0BF1-8FBC-4AC4-B625-1781F8E24511}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9BFF06EB-4E48-4C0A-9A77-540C0E1FB67A}

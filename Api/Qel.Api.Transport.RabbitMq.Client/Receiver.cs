@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Qel.Api.Transport.Generic;
+﻿using Qel.Api.Transport.Generic;
 using Qel.Api.Transport.RabbitMq.Client.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -22,17 +21,11 @@ public class Receiver<T>(ReceiverOptions options, IModel model, ITransportSender
         consumer.Received += (model, ea) =>
         {
             var body = ea.Body.ToArray();
-            var message = Encoding.UTF8.GetString(body);
+            var message = TransportMessageConverter.GetUTF8String(body);
             
-            if(sender is null)
-            {
-                processer.Process();
-            }
-            else
-            {
-                processer.Process(out BaseMessage<T> messageToSend);
-                sender.Send(messageToSend);
-            }
+            BaseMessage<T> messageToProcess = new(message);
+            processer.Process(ref messageToProcess);
+            sender?.Send(messageToProcess);
         };
         channel.BasicConsume(queue: _options.QueueName,
                             autoAck: _options.IsAutoAck,

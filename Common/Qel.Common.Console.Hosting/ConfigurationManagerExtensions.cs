@@ -9,17 +9,28 @@ public static class ConfigurationManagerExtensions
     const string confsPath = @"..\..\..\..\Confs\"; 
     public static ConfigurationManager AddMyStandartConfigureProviders(this ConfigurationManager manager, string? env = "Development", string[]? args = null)
     {
-        var dir = Path.Join(
+        var commonDir = Path.Join(
             Common.Path.PathUtils.GetExecutingAssemblyPath(), 
             confsPath);
 
+        var appDir = Path.Join(
+            Common.Path.PathUtils.GetExecutingAssemblyPath());
+
         manager
             .AddJsonFile(
-                path: Path.Combine(dir, $"commonsettings.json"), 
+                path: Path.Combine(commonDir, $"commonsettings.json"), 
                 optional: false, 
                 reloadOnChange: false)
             .AddJsonFile(
-                path: Path.Combine(dir, $"commonsettings.{env}.json"), 
+                path: Path.Combine(commonDir, $"commonsettings.{env}.json"),
+                optional: true, 
+                reloadOnChange: true)
+            .AddJsonFile(
+                path: Path.Combine(appDir, $"appsettings.json"), 
+                optional: true, 
+                reloadOnChange: true)
+            .AddJsonFile(
+                path: Path.Combine(appDir, $"appsettings.{env}.json"),
                 optional: true, 
                 reloadOnChange: true)
             .AddEnvironmentVariables(o =>

@@ -15,19 +15,53 @@ public sealed class MonitorLoop(
     private readonly CancellationToken _cancellationToken = applicationLifetime.ApplicationStopping;
     private readonly MonitorLoopOptions _options = options;
 
+    /// <summary>
+    /// Run a console user input loop in a background thread
+    /// </summary>
     public void StartMonitorLoop()
     {
-        logger.LogInformation($"{nameof(MonitorAsync)} loop is starting.");
-
-        // Run a console user input loop in a background thread
-        Task.Run(async () => await MonitorAsync());
+        switch (_options.Mode)
+        {
+            case "Auto":
+                logger.LogInformation($"{nameof(AutoMonitorAsync)} loop is starting.");
+                Task.Run(async () => await AutoMonitorAsync());
+                break;
+            case "Semi":
+                logger.LogInformation($"{nameof(SemiMonitorAsync)} loop is starting.");
+                Task.Run(async () => await SemiMonitorAsync());
+                break;
+            case "Single":
+                logger.LogInformation($"{nameof(SingleMonitorAsync)} loop is starting.");
+                Task.Run(async () => await SingleMonitorAsync());
+                break;
+        }
+        
     }
 
-    private async ValueTask MonitorAsync()
+    private async ValueTask AutoMonitorAsync()
     {
         while (!_cancellationToken.IsCancellationRequested)
         {
             await taskQueue.QueueBackgroundWorkItemAsync(BuildWorkItemAsync);
+        }
+    }
+    private async ValueTask SemiMonitorAsync()
+    {
+        while (!_cancellationToken.IsCancellationRequested)
+        {
+            await taskQueue.QueueBackgroundWorkItemAsync(BuildWorkItemAsync);
+        }
+    }
+    private async ValueTask SingleMonitorAsync()
+    {
+        while (!_cancellationToken.IsCancellationRequested)
+        {
+            var keyStroke = System.Console.ReadKey();
+            if (keyStroke.Key == ConsoleKey.Spacebar)
+            { 
+                // Enqueue a background work item
+                await taskQueue.QueueBackgroundWorkItemAsync(BuildWorkItemAsync);
+            }
         }
     }
 

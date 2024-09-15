@@ -8,7 +8,6 @@ public class ClientOptions
     const string defaultHostname = "localhost";
     const int defaultPort = 5672;
 
-
     public string? Hostname { get; init; } = defaultHostname;
     public int Port { get; init; } = defaultPort;
     public string? Name { get; init; } = Guid.NewGuid().ToString();

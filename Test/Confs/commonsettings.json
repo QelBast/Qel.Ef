@@ -1,3 +1,39 @@
 {
-    
+    "ConnectionStrings": {
+        "DbContextTest": "Host:localhost;Port:32942;Username=postgres;Password=postgres;Database=test",
+        "DbContextMain": "Host:localhost;Port:32942;Username=postgres;Password=postgres;Database=main"
+    },
+    "ContextProviders": {
+        "DbContextMain": "Postgres"
+    },
+    "MonitorLoopOptions": {
+        "DelayLoop": 3,
+        "Mode": "Single"
+    },
+    "ReceiverOptions": {
+        "QueueName": "",
+        "IsAutoAck": true,
+        "ConsumerTag": "",
+        "ClientOptions": 
+        {
+            "Hostname": "localhost",
+            "Port": 32346,
+            "Name": "Super",
+            "Username": "guest",
+            "Password": "guest" 
+        }
+    },
+    "SenderOptions": {
+        "ExchangeName": "",
+        "IsMandatory": false,
+        "RoutingKey": "",
+        "ClientOptions": 
+        {
+            "Hostname": "localhost",
+            "Port": 32346,
+            "Name": "Super",
+            "Username": "guest",
+            "Password": "guest" 
+        }
+    }
 }

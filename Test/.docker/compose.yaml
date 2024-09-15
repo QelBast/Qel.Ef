@@ -1,0 +1,26 @@
+name: myef
+networks:
+  ef_rabbit_net:
+services:
+  rabbitmq:
+      image: rabbitmq:3.13.3-management-alpine
+      env_file: rabbit.env
+      healthcheck:
+        test: rabbitmq-diagnostics check_port_connectivity
+        interval: 30s
+        timeout: 30s
+        retries: 10
+      networks:
+        - ef_rabbit_net
+      ports:
+        - 32345:15672
+        - 32346:5672
+      configs:
+        - source: plugins
+          target: /etc/rabbitmq/enabled_plugins
+      volumes:
+        - .docker-conf/rabbitmq:/etc/rabbitmq
+
+configs:
+  plugins:
+    content: "[rabbitmq_management, rabbitmq_jms_topic_exchange]."
