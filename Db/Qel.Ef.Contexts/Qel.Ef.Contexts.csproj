@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.7" />
+  
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Qel.Ef.Models\Qel.Ef.Models.csproj" />
+    <ProjectReference Include="..\Providers\Qel.Ef.Providers.Common\Qel.Ef.Providers.Common.csproj" />
+    <ProjectReference Include="..\Providers\Qel.Ef.Providers.Postgres\Qel.Ef.Providers.Postgres.csproj" />
   </ItemGroup>
 
 </Project>

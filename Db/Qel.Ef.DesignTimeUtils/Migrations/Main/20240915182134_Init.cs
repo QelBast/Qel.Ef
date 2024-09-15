@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Qel.Ef.DesignTimeUtils.Migration.DbContextMain
+namespace Qel.Ef.DesignTimeUtils.Migrations.Main
 {
     /// <inheritdoc />
     public partial class Init : Migration

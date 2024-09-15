@@ -10,6 +10,7 @@
         "DelayLoop": 3,
         "Mode": "Single"
     },
+    "EntityConfigurationsAssemblyPath": "Qel.Ef.Models",
     "ReceiverOptions": {
         "QueueName": "",
         "IsAutoAck": true,
