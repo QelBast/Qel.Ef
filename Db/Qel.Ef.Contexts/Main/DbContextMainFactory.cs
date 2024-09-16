@@ -1,17 +1,19 @@
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Qel.Ef.Contexts.Main;
 
-public class DbContextMainFactory(IDbContextPool<DbContextMain> pool) : PooledDbContextFactory<DbContextMain>(pool)
+public class DbContextMainFactory() : IDbContextFactory<DbContextMain>
 {
-    public override DbContextMain CreateDbContext()
+    public DbContextMain CreateDbContext()
     {
-        return base.CreateDbContext();
-    }
+        var confs = new ConfigurationManager();
+        confs
+        .AddJsonFile("appsettings.json", false, false)
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true)
+        .AddEnvironmentVariables()
+        .Build();
 
-    public override Task<DbContextMain> CreateDbContextAsync(CancellationToken cancellationToken = default)
-    {
-        return base.CreateDbContextAsync(cancellationToken);
+        return new DbContextMain(confs);
     }
 }

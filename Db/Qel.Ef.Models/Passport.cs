@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Qel.Ef.Models.Bases;
 
-//using Qel.Ef
-
 namespace Qel.Ef.Models;
 
 /// <summary>

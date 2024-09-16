@@ -6,6 +6,7 @@ namespace Qel.Ef.Contexts.Bases;
 
 public abstract class MyCustomDbContextBase : DbContext
 {
+    const string prefixPath = "bin/Debug/net9.0/";
     public MyCustomDbContextBase(IConfiguration configuration)
     {
         Configuration = configuration;
@@ -29,7 +30,8 @@ public abstract class MyCustomDbContextBase : DbContext
     {
         if(EntityConfigurationsAssembly is not null)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.LoadFrom(EntityConfigurationsAssembly + ".dll"));
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                Assembly.LoadFrom(Path.Combine($"{prefixPath}", $"{EntityConfigurationsAssembly}.dll")));
         }
         
         base.OnModelCreating(modelBuilder);
