@@ -1,14 +1,15 @@
+using Microsoft.Extensions.Options;
 using Qel.Api.Transport.RabbitMq.Client.Models;
 
 namespace Qel.Api.Transport.RabbitMq.Client;
 
 public class Router<T>(
-    ReceiverOptions receiverOptions,
+    IOptions<ReceiverOptions> receiverOptions,
     IMessageProcesser<T> processer,
-    SenderOptions? senderOptions = null) : ITransportRouter
+    IOptions<SenderOptions>? senderOptions = null) : ITransportRouter
 {
-    readonly ReceiverOptions _receiverOptions = receiverOptions;
-    readonly SenderOptions? _senderOptions = senderOptions;
+    readonly ReceiverOptions _receiverOptions = receiverOptions.Value;
+    readonly SenderOptions? _senderOptions = senderOptions?.Value;
     readonly IMessageProcesser<T> _processer = processer;
     
     public Task AllRouteWithOneConnection(CancellationToken token)

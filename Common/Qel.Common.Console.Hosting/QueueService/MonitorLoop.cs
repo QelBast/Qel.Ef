@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Qel.Api.Transport;
 using Qel.Common.Console.Hosting.Generic;
 
@@ -10,10 +11,10 @@ public sealed class MonitorLoop(
     ILogger<MonitorLoop> logger,
     IHostApplicationLifetime applicationLifetime,
     ITransportRouter router,
-    MonitorLoopOptions options)
+    IOptions<MonitorLoopOptions> options)
 {
     private readonly CancellationToken _cancellationToken = applicationLifetime.ApplicationStopping;
-    private readonly MonitorLoopOptions _options = options;
+    private readonly MonitorLoopOptions _options = options.Value;
 
     /// <summary>
     /// Run a console user input loop in a background thread

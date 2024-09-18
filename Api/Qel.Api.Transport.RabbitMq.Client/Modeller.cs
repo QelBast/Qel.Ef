@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using Qel.Api.Transport.RabbitMq.Client.Models;
 using RabbitMQ.Client;
 
