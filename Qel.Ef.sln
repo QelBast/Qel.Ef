@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Ef.DesignTimeUtils", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Ef.Test.ConsoleApp", "Source\Qel.Ef.Test.ConsoleApp\Qel.Ef.Test.ConsoleApp.csproj", "{D82BB483-DBA8-4145-8994-F7062D931C27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Experiments.Web.Rest.PassportProviderApi", "Source\Qel.Experiments.Web.Rest.PassportProviderApi\Qel.Experiments.Web.Rest.PassportProviderApi.csproj", "{5F2460B7-E167-432A-9E38-048A3342CDDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qel.Ef.DbClient", "Db\Qel.Ef.DbClient\Qel.Ef.DbClient.csproj", "{E04C5780-9E60-48E3-B251-2F6647EB86BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,14 @@ Global
 		{D82BB483-DBA8-4145-8994-F7062D931C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D82BB483-DBA8-4145-8994-F7062D931C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D82BB483-DBA8-4145-8994-F7062D931C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2460B7-E167-432A-9E38-048A3342CDDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2460B7-E167-432A-9E38-048A3342CDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2460B7-E167-432A-9E38-048A3342CDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2460B7-E167-432A-9E38-048A3342CDDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E04C5780-9E60-48E3-B251-2F6647EB86BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E04C5780-9E60-48E3-B251-2F6647EB86BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E04C5780-9E60-48E3-B251-2F6647EB86BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E04C5780-9E60-48E3-B251-2F6647EB86BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +121,8 @@ Global
 		{5CFE6A25-55AA-440E-A212-39B52A30E811} = {FCD5B5C7-207D-46E6-BC38-0B2C824C5FA6}
 		{599CD79B-F7C0-48EA-9DE2-CD19B1495151} = {C1CD0BF1-8FBC-4AC4-B625-1781F8E24511}
 		{D82BB483-DBA8-4145-8994-F7062D931C27} = {BA510D8A-3134-4CCE-BD1D-8683B6DB1679}
+		{5F2460B7-E167-432A-9E38-048A3342CDDA} = {BA510D8A-3134-4CCE-BD1D-8683B6DB1679}
+		{E04C5780-9E60-48E3-B251-2F6647EB86BF} = {C1CD0BF1-8FBC-4AC4-B625-1781F8E24511}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9BFF06EB-4E48-4C0A-9A77-540C0E1FB67A}

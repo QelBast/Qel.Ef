@@ -14,7 +14,7 @@ public class DbContextMain : MyCustomDbContextBase
         Configuration = configuration;
     }
 
-    List<IProviderConfigurator> Configurators { get; set; } = [new Configurator(nameof(DbContextMain))];
+    static List<IProviderConfigurator> Configurators { get; } = [new Configurator(nameof(DbContextMain))];
     IConfiguration Configuration { get; set; }
 
     #region Sets
@@ -25,10 +25,13 @@ public class DbContextMain : MyCustomDbContextBase
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var providedOptions = new ProviderSelector(Configurators).SelectProvider(
-            contextName: GetType().Name,
-            builder: optionsBuilder,
-            config: Configuration);
-        base.OnConfiguring(providedOptions);
+        if(!optionsBuilder.IsConfigured)
+        {
+            var providedOptions = new ProviderSelector(Configurators).SelectProvider(
+                        repositoryName: GetType().Name,
+                        builder: optionsBuilder,
+                        config: Configuration);
+            base.OnConfiguring(providedOptions);
+        }
     }
 }

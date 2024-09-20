@@ -1,0 +1,6 @@
+@Qel.Experiments.Web.Rest.PassportProviderApi_HostAddress = http://localhost:5210
+
+GET {{Qel.Experiments.Web.Rest.PassportProviderApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

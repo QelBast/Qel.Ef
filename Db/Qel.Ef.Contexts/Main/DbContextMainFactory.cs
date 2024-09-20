@@ -9,8 +9,8 @@ public class DbContextMainFactory() : IDbContextFactory<DbContextMain>
     {
         var confs = new ConfigurationManager();
         confs
-        .AddJsonFile("appsettings.json", false, false)
-        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true)
+        //.AddJsonFile("appsettings.json", false, false)
+        //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true)
         .AddEnvironmentVariables()
         .Build();
 

@@ -9,11 +9,8 @@ public abstract class MyCustomDbContextBase : DbContext
     const string prefixPath = "bin/Debug/net9.0/";
     public MyCustomDbContextBase(IConfiguration configuration)
     {
-        Configuration = configuration;
         EntityConfigurationsAssembly = configuration["EntityConfigurationsAssemblyPath"];
     }
-
-    IConfiguration Configuration { get; set; }
 
     string? EntityConfigurationsAssembly { get; init; }
 

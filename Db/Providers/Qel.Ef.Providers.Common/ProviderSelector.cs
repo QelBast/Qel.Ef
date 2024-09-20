@@ -3,13 +3,20 @@ using Microsoft.Extensions.Configuration;
 
 namespace Qel.Ef.Providers.Common;
 
-public class ProviderSelector(IEnumerable<IProviderConfigurator> configurators)
+public class ProviderSelector
 {
-    public DbContextOptionsBuilder SelectProvider(string contextName, DbContextOptionsBuilder builder, IConfiguration config)
+    public ProviderSelector(IEnumerable<IProviderConfigurator> configurators)
     {
-        var providerName = config.GetRequiredSection("ContextProviders").GetRequiredSection(contextName).Value;
+        Configurators = configurators;
+    }
 
-        foreach (var configurator in configurators)
+    public IEnumerable<IProviderConfigurator> Configurators { get; }
+
+    public DbContextOptionsBuilder SelectProvider(string repositoryName, DbContextOptionsBuilder builder, IConfiguration config)
+    {
+        var providerName = config.GetRequiredSection(repositoryName).GetRequiredSection("DbProvider").Value;
+
+        foreach (var configurator in Configurators)
         {
             if (configurator.Tag == providerName)
             {
