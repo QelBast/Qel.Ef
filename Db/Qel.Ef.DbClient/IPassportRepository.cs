@@ -14,7 +14,25 @@ public interface IPassportRepository
     /// Get passport entity by person
     /// </summary>
     /// <param name="person"></param>
-    public Task<Passport> Get(Person person);
+    public Task<Passport?> Get(Person person);
+
+    /// <summary>
+    /// Get passport entity by serie and number
+    /// </summary>
+    /// <param name="person"></param>
+    public Task<Passport?> Get(string serie, string number);
+
+    /// <summary>
+    /// Get passport entity by id
+    /// </summary>
+    /// <param name="person"></param>
+    public Task<Passport?> Get(long id);
+
+    /// <summary>
+    /// Get all passports
+    /// </summary>
+    /// <returns></returns>
+    public Task<IEnumerable<Passport>> Get();
 
     /// <summary>
     /// Update passport entity with the same id
@@ -34,5 +52,5 @@ public interface IPassportRepository
     /// Delete passport entity
     /// </summary>
     /// <returns></returns>
-    public Task Delete<T>(T passportId);
+    public Task Delete(long passportId);
 }

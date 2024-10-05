@@ -15,7 +15,7 @@ public class Configurator(string contextName) : IProviderConfigurator
     public DbContextOptionsBuilder ConfigureOptionsBuilder(DbContextOptionsBuilder options, IConfiguration configuration)
     {
         return options.UseNpgsql(
-            configuration.GetConnectionString(contextName),
+            configuration.GetRequiredSection(contextName)["Connection"],
             providerOptions => 
             { providerOptions
                 .MigrationsAssembly(MigrationsAssemblyName)

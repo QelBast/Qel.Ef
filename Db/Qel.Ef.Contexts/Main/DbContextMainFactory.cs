@@ -9,11 +9,12 @@ public class DbContextMainFactory() : IDbContextFactory<DbContextMain>
     {
         var confs = new ConfigurationManager();
         confs
-        //.AddJsonFile("appsettings.json", false, false)
-        //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true)
-        .AddEnvironmentVariables()
-        .Build();
+        .AddJsonFile("appsettings.json", false, false)
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true);
 
-        return new DbContextMain(confs);
+        var options = new DbContextOptionsBuilder<DbContextMain>().Options;
+        return new DbContextMain(options: options);
     }
+
+    IConfiguration? Configuration { get; set; } = new ConfigurationManager().AddEnvironmentVariables().Build();
 }

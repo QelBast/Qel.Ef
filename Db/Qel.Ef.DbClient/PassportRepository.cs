@@ -1,29 +1,57 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Qel.Ef.Models;
 
 namespace Qel.Ef.DbClient;
 
-public class PassportRepository<TContext> : BaseRepository<TContext>, IPassportRepository
+public class PassportRepository<TContext> : BaseRepository<Passport, TContext>, IPassportRepository
     where TContext : DbContext
 {
-    public Task Add(Passport passport)
+    public PassportRepository(IDbContextFactory<TContext> db, IOptionsSnapshot<RepositoryOptions> options) : base(db, options)
     {
-        throw new NotImplementedException();
     }
 
-    public Task Delete<T>(T passportId)
+    public async Task Add(Passport passport)
     {
-        throw new NotImplementedException();
+        await Entities.AddAsync(passport);
+        await DbContext.SaveChangesAsync();
     }
 
-    public Task<Passport> Get(Person person)
+    public async Task Delete(long passportId)
     {
-        throw new NotImplementedException();
+        var passport = await Get(passportId);
+        if(passport is not null)
+        {
+            Entities.Remove(passport);
+        }
     }
 
-    public Task Update(Passport passportNew)
+    public Task<Passport?> Get(Person person)
     {
-        throw new NotImplementedException();
+        return new Task<Passport?>(() => person.Passport);
+    }
+
+    public async Task<Passport?> Get(string serie, string number)
+    {
+        var passport = Entities.FirstOrDefaultAsync(x => x.Serie == serie && x.Number == number);
+        return await passport;
+    }
+
+    public async Task<Passport?> Get(long id)
+    {
+        var passport = Entities.FirstOrDefaultAsync(x => x.Id == id);
+        return await passport;
+    }
+
+    public async Task<IEnumerable<Passport>> Get()
+    {
+        return await Entities.ToListAsync();
+    }
+
+    public async Task Update(Passport passportNew)
+    {
+        //var passportOld = await Get(passportNew.Id);
+        await Task.Run(() => Entities.Update(passportNew));
     }
 
     public Task Update(Passport passportOld, Passport passportNew)

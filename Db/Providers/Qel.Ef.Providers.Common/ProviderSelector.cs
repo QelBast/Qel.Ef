@@ -12,9 +12,9 @@ public class ProviderSelector
 
     public IEnumerable<IProviderConfigurator> Configurators { get; }
 
-    public DbContextOptionsBuilder SelectProvider(string repositoryName, DbContextOptionsBuilder builder, IConfiguration config)
+    public DbContextOptionsBuilder SelectProvider(string key, DbContextOptionsBuilder builder, IConfiguration config)
     {
-        var providerName = config.GetRequiredSection(repositoryName).GetRequiredSection("DbProvider").Value;
+        var providerName = config.GetRequiredSection(key).GetRequiredSection("DbProvider").Value;
 
         foreach (var configurator in Configurators)
         {

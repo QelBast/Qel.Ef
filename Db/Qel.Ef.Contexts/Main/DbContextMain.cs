@@ -9,29 +9,25 @@ namespace Qel.Ef.Contexts.Main;
 
 public class DbContextMain : MyCustomDbContextBase
 {
-    public DbContextMain(IConfiguration configuration) : base(configuration)
+    public DbContextMain(DbContextOptions options) : base(options)
     {
-        Configuration = configuration;
+
     }
 
     static List<IProviderConfigurator> Configurators { get; } = [new Configurator(nameof(DbContextMain))];
-    IConfiguration Configuration { get; set; }
+    IConfiguration? Configuration { get; set; }
 
     #region Sets
-    public DbSet<Person>? Persons;
-    public DbSet<Passport>? Passports;
-    public DbSet<Request>? Requests;
+    public DbSet<Person>? Persons { get; set; }
+    public DbSet<Passport>? Passports { get; set; }
+    public DbSet<Request>? Requests {get; set; }
     #endregion
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if(!optionsBuilder.IsConfigured)
         {
-            var providedOptions = new ProviderSelector(Configurators).SelectProvider(
-                        repositoryName: GetType().Name,
-                        builder: optionsBuilder,
-                        config: Configuration);
-            base.OnConfiguring(providedOptions);
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Qel.Ef.Contexts.Main;
@@ -11,9 +12,11 @@ using Qel.Ef.Contexts.Main;
 namespace Qel.Ef.DesignTimeUtils.Migrations.Main
 {
     [DbContext(typeof(DbContextMain))]
-    partial class DbContextMainModelSnapshot : ModelSnapshot
+    [Migration("20240921164332_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,20 +48,6 @@ namespace Qel.Ef.DesignTimeUtils.Migrations.Main
                     b.ToTable("Passports", null, t =>
                         {
                             t.HasComment("Паспортные данные клиента");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Number = "123456",
-                            Serie = "0311"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Number = "213455",
-                            Serie = "2228"
                         });
                 });
 
@@ -94,24 +83,6 @@ namespace Qel.Ef.DesignTimeUtils.Migrations.Main
                         {
                             t.HasComment("Физические лица, отправляющие заявки в банк");
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Birthdate = new DateTime(2024, 9, 21, 16, 53, 57, 62, DateTimeKind.Utc).AddTicks(6161),
-                            FirstName = "Иван",
-                            LastName = "Иванов",
-                            PassportId = 1L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Birthdate = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified).AddTicks(9999),
-                            FirstName = "Владимир",
-                            LastName = "Горбатый",
-                            PassportId = 2L
-                        });
                 });
 
             modelBuilder.Entity("Qel.Ef.Models.Request", b =>
@@ -135,20 +106,6 @@ namespace Qel.Ef.DesignTimeUtils.Migrations.Main
                     b.ToTable("Requests", null, t =>
                         {
                             t.HasComment("Заявка в банк");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Period = 12,
-                            Summa = 100000
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Period = 36,
-                            Summa = 1230900
                         });
                 });
 

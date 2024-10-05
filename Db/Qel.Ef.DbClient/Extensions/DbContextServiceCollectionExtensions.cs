@@ -21,47 +21,51 @@ public static class DbContextServiceCollectionExtensions
         return services.AddTransient<TIRepository, TRepository>()
             .AddPooledDbContextFactory<TContext>(builder => 
                 {
-                    var section = JsonSerializer.Deserialize<RepositoryOptions>(
+                    var section = JsonSerializer.Deserialize<DbClientOptions>(
                         configuration.GetRequiredSection($"{typeof(TContext).Name}{typeof(TRepository).Name}").ToString() ?? string.Empty) 
-                        ?? new() { ContextDbProvider = "Postgres" };
+                        ?? new() { DbProvider = "Postgres" };
                     builder.EnableDetailedErrors(section.DetailedErrors)
                         .EnableSensitiveDataLogging(section.SensitiveDataLogging)
                         .EnableServiceProviderCaching(section.ServiceProviderCaching)
                         .EnableThreadSafetyChecks(section.ThreadSafetyChecks);
                     var providerConfiguredOptions = 
                     builder = new ProviderSelector(providerConfigurators).SelectProvider(
-                        repositoryName: typeof(TContext).Name,
+                        key: typeof(TContext).Name,
                         builder: builder,
                         config: configuration);
                 }
             );
     }
 
-    public static IServiceCollection AddRepositories<TContext>(
+    public static IServiceCollection AddDbClient<TContext>(
         this IServiceCollection services,
-        string key,
+        Action<IRepositoryRegistration<TContext>> registerRepositories,
         IConfiguration configuration,
         IEnumerable<IProviderConfigurator> providerConfigurators,
-        Action<IRepositoryRegistration<TContext>> registerRepositories)
+        string? key = null)
         where TContext : DbContext
     {
+        key ??= typeof(TContext).Name;
+
+        var section = configuration.GetRequiredSection(key);
+        DbClientOptions options = section.Get<DbClientOptions>() ?? 
+                throw new NullReferenceException("Ожидался провайдер БД");
+
         services.AddPooledDbContextFactory<TContext>(builder => 
             {
-                var section = JsonSerializer.Deserialize<RepositoryOptions>(
-                    configuration.GetRequiredSection($"{typeof(TContext).Name}{key}").ToString() ?? string.Empty) 
-                    ?? new() { ContextDbProvider = "Postgres" };
-                builder.EnableDetailedErrors(section.DetailedErrors)
-                    .EnableSensitiveDataLogging(section.SensitiveDataLogging)
-                    .EnableServiceProviderCaching(section.ServiceProviderCaching)
-                    .EnableThreadSafetyChecks(section.ThreadSafetyChecks);
+                builder.EnableDetailedErrors(options.DetailedErrors)
+                    .EnableSensitiveDataLogging(options.SensitiveDataLogging)
+                    .EnableServiceProviderCaching(options.ServiceProviderCaching)
+                    .EnableThreadSafetyChecks(options.ThreadSafetyChecks);
                 var providerConfiguredOptions = 
                 builder = new ProviderSelector(providerConfigurators).SelectProvider(
-                    repositoryName: typeof(TContext).Name,
+                    key: key,
                     builder: builder,
                     config: configuration);
             }
         );
-        var registration = new RepositoryRegistration<TContext>(services);
+
+        var registration = new RepositoryRegistration<TContext>(services, options.Repositories);
         registerRepositories(registration);
 
         return services;

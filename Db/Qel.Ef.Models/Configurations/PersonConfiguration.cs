@@ -20,5 +20,15 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
             .IsRequired();
         builder.Property(e => e.Birthdate)
             .IsRequired();
+
+        builder.HasOne(e => e.Passport)
+            .WithMany()
+            .HasForeignKey(e => e.PassportId)
+            .IsRequired();
+
+        builder.HasData([
+            new() { Id = 1, FirstName = "Иван", LastName = "Иванов", Birthdate = DateTime.UtcNow, PassportId = 1},
+            new() { Id = 2, FirstName = "Владимир", LastName = "Горбатый", Birthdate = DateTime.MaxValue, PassportId = 2},
+            ]);
     }
 }

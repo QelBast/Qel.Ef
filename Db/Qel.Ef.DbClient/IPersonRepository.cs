@@ -5,18 +5,25 @@ namespace Qel.Ef.DbClient;
 public interface IPersonRepository
 {
     /// <summary>
-    /// Add passport entity to Db
+    /// Add person entity to Db
     /// </summary>
     /// <param name="passport"></param>
     /// <returns></returns>
-    public Task Add(Person passport);
+    public Task Add(Person person);
 
     /// <summary>
-    /// Get passport entity by person
+    /// Get person entity by passport
     /// </summary>
     /// <param name="person"></param>
     /// <returns></returns>
-    public Task<Passport> Get(Person person);
+    public Task<Person?> Get(Passport passport);
+
+    /// <summary>
+    /// Get all persons
+    /// </summary>
+    /// <param name="person"></param>
+    /// <returns></returns>
+    public Task<IEnumerable<Person>> Get();
 
     /// <summary>
     /// Update passport entity with the same id
@@ -37,5 +44,5 @@ public interface IPersonRepository
     /// Delete passport entity
     /// </summary>
     /// <returns></returns>
-    public Task Delete<T>(T passportId);
+    public Task Delete(long passportId);
 }

@@ -1,10 +1,7 @@
 {
-    "ConnectionStrings": {
-        "DbContextTest": "Host=localhost;Port=32942;Username=postgres;Password=postgres;Database=test",
-        "DbContextMain": "Host=localhost;Port=32942;Username=postgres;Password=postgres;Database=main"
-    },
-    "ContextProviders": {
-        "DbContextMain": "Postgres"
+    "DbContextMain": {
+        "Connection": "Host=localhost;Port=32942;Username=postgres;Password=postgres;Database=main",
+        "DbProvider": "Postgres"
     },
     "EntityConfigurationsAssemblyPath": "Qel.Ef.Models"
 }

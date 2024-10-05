@@ -6,7 +6,7 @@ namespace Qel.Ef.DbClient;
 public interface IRepositoryRegistration<TContext>
     where TContext : DbContext
 {
-    public void AddRepository<TIRepository, TRepository>()
+    public void AddTransientRepository<TIRepository, TRepository>()
         where TIRepository : class
         where TRepository : class, TIRepository;
 }

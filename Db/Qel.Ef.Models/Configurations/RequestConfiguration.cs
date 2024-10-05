@@ -18,5 +18,10 @@ public class RequestConfiguration : IEntityTypeConfiguration<Request>
             builder.Property(e => e.Summa)
                 .HasMaxLength(128)
                 .IsRequired();
+
+            builder.HasData([
+                new() { Id = 1, Summa = 100000, Period = 12 },
+                new() { Id = 2, Summa = 1230900, Period = 36 }
+            ]);
     }
 }

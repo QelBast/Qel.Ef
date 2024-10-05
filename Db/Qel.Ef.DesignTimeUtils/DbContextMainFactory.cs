@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Qel.Ef.Contexts.Main;
+using Qel.Ef.Providers.Common;
+using Qel.Ef.Providers.Postgres;
 
 namespace Qel.Ef.Migrations;
 
@@ -16,6 +19,13 @@ public class DbContextMainFactory : IDesignTimeDbContextFactory<DbContextMain>
         .AddCommandLine(args)
         .Build();
 
-        return new DbContextMain(confs);
+        var builder =  new DbContextOptionsBuilder<DbContextMain>();
+        var providedOptions = new ProviderSelector([new Configurator(nameof(DbContextMain))]).SelectProvider(
+                        key: nameof(DbContextMain),
+                        builder: builder,
+                        config: confs);
+        
+        //var options = new DbContextOptionsBuilder<DbContextMain>().Options;
+        return new DbContextMain(providedOptions.Options);
     }
 }

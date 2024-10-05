@@ -12,8 +12,8 @@ using Qel.Ef.Contexts.Main;
 namespace Qel.Ef.DesignTimeUtils.Migrations.Main
 {
     [DbContext(typeof(DbContextMain))]
-    [Migration("20240916140302_Init")]
-    partial class Init
+    [Migration("20240921165357_Fill")]
+    partial class Fill
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,19 +33,35 @@ namespace Qel.Ef.DesignTimeUtils.Migrations.Main
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("Number")
+                    b.Property<string>("Number")
+                        .IsRequired()
                         .HasMaxLength(16)
-                        .HasColumnType("integer");
+                        .HasColumnType("character varying(16)");
 
-                    b.Property<int>("Serie")
+                    b.Property<string>("Serie")
+                        .IsRequired()
                         .HasMaxLength(8)
-                        .HasColumnType("integer");
+                        .HasColumnType("character varying(8)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Passport", null, t =>
+                    b.ToTable("Passports", null, t =>
                         {
                             t.HasComment("Паспортные данные клиента");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Number = "123456",
+                            Serie = "0311"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Number = "213455",
+                            Serie = "2228"
                         });
                 });
 
@@ -70,11 +86,34 @@ namespace Qel.Ef.DesignTimeUtils.Migrations.Main
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)");
 
+                    b.Property<long>("PassportId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PassportId");
 
                     b.ToTable("Persons", null, t =>
                         {
                             t.HasComment("Физические лица, отправляющие заявки в банк");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Birthdate = new DateTime(2024, 9, 21, 16, 53, 57, 62, DateTimeKind.Utc).AddTicks(6161),
+                            FirstName = "Иван",
+                            LastName = "Иванов",
+                            PassportId = 1L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Birthdate = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Unspecified).AddTicks(9999),
+                            FirstName = "Владимир",
+                            LastName = "Горбатый",
+                            PassportId = 2L
                         });
                 });
 
@@ -100,6 +139,31 @@ namespace Qel.Ef.DesignTimeUtils.Migrations.Main
                         {
                             t.HasComment("Заявка в банк");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Period = 12,
+                            Summa = 100000
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Period = 36,
+                            Summa = 1230900
+                        });
+                });
+
+            modelBuilder.Entity("Qel.Ef.Models.Person", b =>
+                {
+                    b.HasOne("Qel.Ef.Models.Passport", "Passport")
+                        .WithMany()
+                        .HasForeignKey("PassportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Passport");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,6 +9,6 @@ namespace Qel.Ef.Models;
 [Comment("Паспортные данные клиента")]
 public class Passport : BaseEntity<long>
 {
-    public int Serie { get; set; }
-    public int Number { get; set; }
+    public required string Serie { get; set; }
+    public required string Number { get; set; }
 }
