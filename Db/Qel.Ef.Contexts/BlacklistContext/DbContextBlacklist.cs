@@ -1,26 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Qel.Ef.Contexts.Bases;
-using Qel.Ef.Models;
+using Qel.Ef.Models.BlacklistContext;
 using Qel.Ef.Providers.Common;
 using Qel.Ef.Providers.Postgres;
 
-namespace Qel.Ef.Contexts.Main;
+namespace Qel.Ef.Contexts.BlacklistContext;
 
-public class DbContextMain : MyCustomDbContextBase
+public class DbContextBlacklist : MyCustomDbContextBase
 {
-    public DbContextMain(DbContextOptions options) : base(options)
+    public DbContextBlacklist(DbContextOptions options) : base(options)
     {
 
     }
 
-    static List<IProviderConfigurator> Configurators { get; } = [new Configurator(nameof(DbContextMain))];
+    static List<IProviderConfigurator> Configurators { get; } = [new Configurator(nameof(DbContextBlacklist))];
     IConfiguration? Configuration { get; set; }
 
     #region Sets
-    public DbSet<Person>? Persons { get; set; }
-    public DbSet<Passport>? Passports { get; set; }
-    public DbSet<Request>? Requests {get; set; }
+    public DbSet<BlacklistedPerson>? BlacklistedPersons { get; set; }
     #endregion
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
